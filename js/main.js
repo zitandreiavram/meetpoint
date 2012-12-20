@@ -45,6 +45,20 @@ jQuery(document).ready(function($) {
 		$('.map').hide();
 		localStorage.removeItem('_app_data');
 	})
+	
+	$('.send_message_open').live('click', function() {
+		$('#send_message').show();
+		return false;
+	})
+	
+	$('#send_message_action').bind('click', function() {
+		$.post(url, $('#send_message_form').serialize(), function(data) {
+			if (data.result = 1) {
+				alert(data.message);
+				$('#send_message').hide();
+			}
+		}, 'JSON')
+	})
 
 })
 
@@ -68,8 +82,10 @@ function add_point(position, me) {
 	}
 	
 	if (infoWindow == null) {
-		infoWindow = new google.maps.InfoWindow({});
+//		infoWindow = new google.maps.InfoWindow({});
 	}
+	
+	var infoWindow = new google.maps.InfoWindow({});
 	
 	var clientPosition = new google.maps.LatLng(position.latitude, position.longitude);
 	$('#map_canvas').gmap('addMarker', {'position': clientPosition, 'bounds': true, 'icon': 'images/me.png', 'animation': google.maps.Animation.DROP}, function(map, marker) {
@@ -101,10 +117,12 @@ function add_point(position, me) {
 			var long = position.longitude - Math.random() * 0.0003;
 		}
 		
+		var infoWindow = new google.maps.InfoWindow({});
+		
 		var clientPosition = new google.maps.LatLng(lat, long);
 		$('#map_canvas').gmap('addMarker', {'position': clientPosition, 'animation': google.maps.Animation.DROP}, function(map, marker) {
 			google.maps.event.addListener(marker, 'click', function() {
-			    infoWindow.setContent(lat + ', ' + long);
+			    infoWindow.setContent('Random user ' + (parseInt(5 + Math.random() * 10, 10)) + '<br /><br /><a href="#" class="send_message_open">Send message</a>');
 			    infoWindow.open(map,marker);
 			});
 		});
