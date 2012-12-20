@@ -47,6 +47,7 @@ jQuery(document).ready(function($) {
 	})
 	
 	$('.send_message_open').live('click', function() {
+		$('#to').text($(this).attr('rel'));
 		$('#send_message').show();
 		return false;
 	})
@@ -122,7 +123,8 @@ function add_point(position, me) {
 		var clientPosition = new google.maps.LatLng(lat, long);
 		$('#map_canvas').gmap('addMarker', {'position': clientPosition, 'animation': google.maps.Animation.DROP}, function(map, marker) {
 			google.maps.event.addListener(marker, 'click', function() {
-			    infoWindow.setContent('Random user ' + (parseInt(5 + Math.random() * 10, 10)) + '<br /><br /><a href="#" class="send_message_open">Send message</a>');
+				var u = 'Random user ' + parseInt(5 + Math.random() * 10, 10);
+			    infoWindow.setContent(u + '<br /><br /><a href="#" class="send_message_open" rel="' + u + '">Send message</a>');
 			    infoWindow.open(map,marker);
 			});
 		});
