@@ -1,4 +1,5 @@
-var url = 'http://localhost/meetpoint/dev/app/';
+//var url = 'http://localhost/meetpoint/dev/app/';
+var url = 'http://www.crma.ro/meetpoint/dev/app/';
 
 jQuery(document).ready(function($) {
 	
