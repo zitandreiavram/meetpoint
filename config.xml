@@ -17,6 +17,6 @@
         ZIT
     </author>
     
-    <preference name="phonegap-version" value="2.o.0" />
+    <preference name="phonegap-version" value="2.0.0" />
 
 </widget>
