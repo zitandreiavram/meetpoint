@@ -65,7 +65,7 @@ jQuery(document).ready(function($) {
 
 function showConfirm() {
 	navigator.notification.confirm(message, confirmCallback, 'Chat?', 'YES,NO');
-)
+}
 
 function confirmCallback(buttonIndex) {
 	alert('You selected button ' + buttonIndex);
