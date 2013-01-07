@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=320; user-scalable=no" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Meetpoint</title>
+	<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.0.1.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.1.css" type="text/css" media="screen" charset="utf-8">
+	
+	<script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.0.1.min.js"></script>
+	
+	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script src="js/jquery.ui.map.js"></script>
+	<script src="js/jquery.ui.map.overlays.js"></script>
+	<script src="js/jquery.ui.map.extensions.js"></script>
+	
+<!--	<script src="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.full.min.js"></script>-->
+	
+	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+	
+	<script src="phonegap.js"></script>
+	<script src="cordova.js"></script>
+	
+</head>
+<body id="stage" class="theme">
+<h1>MeetPoint <span class="logout">[<a href="#" id="logout">logout</a>]</span></h1>
+
+<div class="main">
+	
+	<a href="#" class="btn large nav" id="register">Register</a>
+	<a href="#" class="btn large nav" id="login">Login</a>
+
+	<div class="info register">
+		<h4>Register</h4>
+		<form id="register_form">
+			<input type="text" name="email" placeholder="Email" /><br />
+			<input type="text" name="password" placeholder="Password" /><br />
+			<a href="#" id="register_action">GO</a>
+			<input type="hidden" name="action" value="register" />
+		</form>
+	</div>
+	
+	<div class="info login">
+		<h4>Login</h4>
+		<form id="login_form">
+			<input type="text" name="email" placeholder="Email" /><br />
+			<input type="text" name="password" placeholder="Password" /><br />
+			<a href="#" id="login_action">GO</a>
+			<input type="hidden" name="action" value="login" />
+		</form>
+	</div>
+	
+</div>
+
+<div class="map">
+	<div id="map_canvas"></div>
+</div>
+
+<div class="send_message" id="send_message">
+	Message to: <span id="to"></span> <br /><br />
+	<form id="send_message_form">
+		<textarea id="message_content" name="message"></textarea> <br />
+		<input type="hidden" name="action" value="send_message" />
+	</form>
+	<a href="#" id="send_message_action">Send</a>
+</div>
+
+<div class="message" id="message">
+</div>
+
+<textarea id="log" readonly="readonly"></textarea>
+
+<script src="index.js"></script>
+
+</body>
+</html>

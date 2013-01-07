@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.example"
+        versionCode="10" 
+        version   = "1.0.0">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>MeetPoint</name>
+
+    <description>
+        MeetPoint DEV
+    </description>
+
+    <author href="https//www.zit.ro" email="office@zit.ro">
+        ZIT
+    </author>
+    
+    <preference name="phonegap-version" value="2.0.0" />
+
+</widget>
