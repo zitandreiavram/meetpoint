@@ -44,6 +44,7 @@ jQuery(document).ready(function($) {
 		$('.main').show();
 		$('.map').hide();
 		localStorage.removeItem('_app_data');
+		window.location.reload();
 	})
 	
 	$('.send_message_open').live('click', function() {
