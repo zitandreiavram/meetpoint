@@ -163,9 +163,6 @@ var getLocation = function() {
 };
 
 function showAlert() {
-	alert('alert');
-	return false;
-	
     navigator.notification.alert(
         'You are the winner!',  // message
         alertDismissed,         // callback
