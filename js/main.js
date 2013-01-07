@@ -46,6 +46,15 @@ jQuery(document).ready(function($) {
 		localStorage.removeItem('_app_data');
 	})
 	
+	$('#notification').bind('click', function() {
+		navigator.notification.confirm(message, confirmCallback, 'Chat?', 'YES,NO');
+		return false;
+	})
+	
+	function confirmCallback(buttonIndex) {
+		alert('You selected button ' + buttonIndex);
+	}
+	
 	$('.send_message_open').live('click', function() {
 		$('#to').text($(this).attr('rel'));
 		$('#send_message').show();
