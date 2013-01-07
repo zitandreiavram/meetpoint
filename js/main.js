@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 	})
 	
 	$('#notification').bind('click', function() {
-		navigator.notification.confirm('Message...', confirmCallback, 'Chat?', 'YES,NO');
+		navigator.notification.confirm('Message!', confirmCallback, 'Chat?', 'YES,NO');
 		return false;
 	})
 	
