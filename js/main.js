@@ -46,15 +46,6 @@ jQuery(document).ready(function($) {
 		localStorage.removeItem('_app_data');
 	})
 	
-	$('#notification').bind('click', function() {
-		navigator.notification.confirm(message, confirmCallback, 'Chat?', 'YES,NO');
-		return false;
-	})
-	
-	function confirmCallback(buttonIndex) {
-		alert('You selected button ' + buttonIndex);
-	}
-	
 	$('.send_message_open').live('click', function() {
 		$('#to').text($(this).attr('rel'));
 		$('#send_message').show();
@@ -71,6 +62,14 @@ jQuery(document).ready(function($) {
 	})
 
 })
+
+function showConfirm() {
+	navigator.notification.confirm(message, confirmCallback, 'Chat?', 'YES,NO');
+)
+
+function confirmCallback(buttonIndex) {
+	alert('You selected button ' + buttonIndex);
+}
 
 function map() {
 	$('#map_canvas').gmap().bind('init', function(evt, map) {
@@ -163,3 +162,15 @@ var getLocation = function() {
     navigator.geolocation.getCurrentPosition(suc, locFail);
 };
 
+function showAlert() {
+    navigator.notification.alert(
+        'You are the winner!',  // message
+        alertDismissed,         // callback
+        'Game Over',            // title
+        'Done'                  // buttonName
+    );
+}
+
+function alertDismissed() {
+    alert(1);
+}
