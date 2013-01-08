@@ -289,6 +289,7 @@ function onPhotoDataSuccess(imageData) {
 
   // Get image handle
   //
+	alert(imageData);
   var smallImage = document.getElementById('smallImage');
 
   // Unhide image elements
@@ -309,6 +310,7 @@ function onPhotoURISuccess(imageURI) {
 
   // Get image handle
   //
+	alert(imageURI);
   var largeImage = document.getElementById('smallImage');
 
   // Unhide image elements
@@ -327,6 +329,7 @@ function capturePhoto() {
 }
 
 function getPhoto(source) {
+	alert(source);
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
       destinationType: destinationType.FILE_URI,
