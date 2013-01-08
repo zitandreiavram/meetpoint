@@ -142,10 +142,18 @@ function get_chat($from, $to) {
 
 if ($action == 'upload_photo')
 {
-	$user = isset($_GET['user']) ? (int) $_GET['user'] : 0;
+	$user = isset($_POST['user']) ? (int) $_POST['user'] : 0;
 	$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 	$filename = md5($user.$_FILES['file']['name']).'.'.$ext;
-	move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $filename);
+	$path = 'uploads/' . $filename;
+	move_uploaded_file($_FILES['file']['tmp_name'], $path);
+
+	include 'simpleimage.php';
+	ini_set('memory_limit', '1024M');
+	$image = new SimpleImage();
+	$image->load($path);
+	$image->resizeToWidth(250);
+	$image->save($path);
 
 	$query = "UPDATE users SET photo = '{$filename}' WHERE id = {$user}";
 	mysql_query($query);
