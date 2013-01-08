@@ -1,6 +1,8 @@
 //var url = 'http://localhost/meetpoint/dev/app/';
 var url = 'http://www.crma.ro/meetpoint/dev/app/';
 
+var watchID;
+
 jQuery(document).ready(function($) {
 	
 	if (is_logged()) {
@@ -54,6 +56,7 @@ jQuery(document).ready(function($) {
 			$('.main').show();
 			$('.map').hide();
 			$('#send_message').hide();
+			navigator.geolocation.clearWatch(watchID);
 			localStorage.removeItem('_app_data');
 		})
 	})
@@ -126,73 +129,80 @@ var markers = [];
 function populate() {
 	var user = get_user();
 	
-	$.getJSON(url, {action: 'get', user: user.user}, function(data) {
-		
-		for (var i = 0; i < markers.length; i++ ) {
-			markers[i].setMap(null);
-			markers.splice(update, 1);
-		}
-		
-		$(data.points).each(function() {
-			var p = {latitude: this.lat, longitude: this.long};
-			add_point(p, false, {username: this.username, id: this.id});
-		})
-		
-	})
-	
-	
-	/*
 	var x = window.setInterval(function() {
-		$.getJSON(url, {action: 'get', user: user.user}, function(data) {
-			
-			for (var i = 0; i < markers.length; i++ ) {
-				markers[i].setMap(null);
-				markers.splice(update, 1);
-			}
-			
+		$.getJSON(url, {action: 'get_points', user: user.user}, function(data) {
 			$(data.points).each(function() {
-				var p = {latitude: this.lat, longitude: this.long};
-				add_point(p, false, {username: this.username, id: this.id});
+				
+				var index = this.id;
+				
+//				for (var i = 0; i < markers.length; i++ ) {
+//					if (markers[i].user == this.id) {
+//						index = i;
+//					}
+//				}
+				
+				// if user no longer online, remove point
+				if (this.online == 0) {
+					if (typeof markers[index] != 'undefined') {
+						markers[index].setMap(null);
+						markers.splice(index, 1);
+					}
+				}
+				
+				// if user still online
+				else {
+					// if new user, add point
+					if (typeof markers[index] == 'undefined') {
+						if (this.online == 1) {
+							var p = {latitude: this.lat, longitude: this.long};
+							add_point(p, false, {username: this.username, id: this.id});
+						}
+					}
+					
+					// if user already on map, update point only if position changed
+					else {
+//						console.log(markers[index].lat +' =? '+ this.lat + ' | ' + markers[index].long +' =? '+ this.long)
+						if (markers[index].lat != this.lat || markers[index].long != this.long) {
+							markers[index].setMap(null);
+							markers.splice(index, 1);
+							
+							var p = {latitude: this.lat, longitude: this.long};
+							add_point(p, false, {username: this.username, id: this.id, lat: this.lat, long: this.long});
+						}
+					}
+				}
+				
 			})
 			
-			
-			if (data.points) {
-				$(data.points).each(function() {
-					var update = true;
-					
-					for (var i = 0; i < markers.length; i++ ) {
-						
-						if (markers[i].user == this.id) {
-							update = false;
-							
-							if (markers[i].lat != this.lat && markers[i].long != this.long) {
-								update = i;
-							}
-						}
-					}
-					
-					if (update !== false) {
-						if (typeof update == 'number') {
-							markers[update].setMap(null);
-							markers.splice(update, 1);
-						}
-						
-						var p = {latitude: this.lat, longitude: this.long};
-						add_point(p, false, {username: this.username, id: this.id});
-					}
-					
-				})
-				
-			}
 		})
 	}, 1000);
-	*/
+	
 	//clearInterval(x);
 }
 
 function listen() {
-	
+	var options = { frequency: 3000 };
+    watchID = navigator.geolocation.watchPosition(listenOnSuccess, listenOnError, options);
 }
+
+function listenOnSuccess(position) {
+	var params = {
+		action: 'update_position',
+		user: get_user().user,
+		lat: position.coords.latitude,
+		long: position.coords.longitude
+	}
+	
+	$.post(url, params, function(data) {
+	}, 'JSON')
+}
+
+function listenOnError(error) {
+//	alert('code: '    + error.code    + '\n' +
+//            'message: ' + error.message + '\n');
+}
+
+
 
 function map() {
 	$('#map_canvas').gmap().bind('init', function(evt, map) {
@@ -239,8 +249,11 @@ function add_point(position, me, user) {
 		var clientPosition = new google.maps.LatLng(position.latitude, position.longitude);
 		$('#map_canvas').gmap('addMarker', {'position': clientPosition}, function(map, marker) {
 			marker.user = user.id;
+			marker.lat = user.lat;
+			marker.long = user.long;
 			marker.p = {lat: position.latitude, long: position.longitude};
-			markers.push(marker);
+//			markers.push(marker);
+			markers[user.id] = marker;
 			google.maps.event.addListener(marker, 'click', function() {
 			    infoWindow.setContent(user.username + '<br /><br /><a href="#" class="send_message_open" rel="' + user.id + '" rev="' + user.username + '">Send message</a>');
 			    infoWindow.open(map,marker);

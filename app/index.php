@@ -81,10 +81,10 @@ if ($action == 'location')
 	}
 }
 
-if ($action == 'get')
+if ($action == 'get_points')
 {
 	$user = isset($_GET['user']) ? (int) $_GET['user'] : 0;
-	$query = "SELECT id, `email` username, `long`, `lat` FROM users WHERE id <> {$user} AND online";
+	$query = "SELECT id, `email` username, `long`, `lat`, online FROM users WHERE id <> {$user}";
 	$result = mysql_query($query);
 	$data = array();
 
@@ -157,6 +157,15 @@ if ($action == 'upload_photo')
 
 	$query = "UPDATE users SET photo = '{$filename}' WHERE id = {$user}";
 	mysql_query($query);
+}
+
+if ($action == 'update_position') {
+	$user = isset($_REQUEST['user']) ? (int) $_REQUEST['user'] : 0;
+	$long = isset($_REQUEST['long']) ? (float) $_REQUEST['long'] : '';
+	$lat = isset($_REQUEST['lat']) ? (float) $_REQUEST['lat'] : '';
+	$query = "UPDATE users SET long = {$long}, lat = {$lat}, `update` = NOW() WHERE id = {$user}";
+	mysql_query($query);
+	$response['result'] = 1;
 }
 
 die(json_encode($response));
