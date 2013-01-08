@@ -289,7 +289,7 @@ function onPhotoDataSuccess(imageData) {
 
   // Get image handle
   //
-	alert(imageData);
+//	alert(imageData);
   var smallImage = document.getElementById('smallImage');
 
   // Unhide image elements
@@ -299,7 +299,8 @@ function onPhotoDataSuccess(imageData) {
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
-  smallImage.src = "data:image/jpeg;base64," + imageData;
+//  smallImage.src = "data:image/jpeg;base64," + imageData;
+  smallImage.src = imageData;
 }
 
 //Called when a photo is successfully retrieved
@@ -328,8 +329,10 @@ function capturePhoto() {
 	navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 80 });
 }
 
-function getPhoto(source) {
-	alert(source);
+function getPhoto() {
+	var source = pictureSource.PHOTOLIBRARY;
+	//pictureSource.SAVEDPHOTOALBUM
+
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
       destinationType: destinationType.FILE_URI,

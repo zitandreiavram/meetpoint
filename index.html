@@ -18,9 +18,10 @@
 	
 <!--	<script src="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.full.min.js"></script>-->
 	
+	<script src="phonegap.js"></script>
+	
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	
-	<script src="phonegap.js"></script>
 <!--	<script src="cordova.js"></script>-->
 	
 </head>
@@ -40,9 +41,9 @@
 			<input type="text" name="password" placeholder="Password" /><br />
 			Photo:<br />
 			- <button onclick="capturePhoto();">Capture Photo</button> <br />
-			- <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br />
-   			- <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br />
-   			<img id="smallImage" />
+			- <button onclick="getPhoto();">From Photo Library</button><br />
+   			- <button onclick="getPhoto();">From Photo Album</button><br />
+   			<img id="smallImage" src="" alt="" style="display:none" />
 			<br />
 			<a href="#" id="register_action">GO</a>
 			<input type="hidden" name="action" value="register" />
