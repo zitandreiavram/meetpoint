@@ -366,7 +366,7 @@ function upload_photo_fail (error) {
 }
 
 function capturePhoto() {
-	if (is_logged()) {
+	if ( ! is_logged()) {
 		message('Please login');
 		return false;
 	}
@@ -375,7 +375,7 @@ function capturePhoto() {
 }
 
 function getPhoto() {
-	if (is_logged()) {
+	if ( ! is_logged()) {
 		message('Please login');
 		return false;
 	}
