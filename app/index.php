@@ -42,7 +42,7 @@ if ($action == 'login')
 		{
 			$long = isset($_REQUEST['long']) ? (float) $_REQUEST['long'] : '';
 			$lat = isset($_REQUEST['lat']) ? (float) $_REQUEST['lat'] : '';
-			$query = "UPDATE users SET long = {$long}, lat = {$lat}, online = 1 WHERE id = {$row->id}";
+			$query = "UPDATE users SET long = {$long}, lat = {$lat}, online = 1, `update` = NOW() WHERE id = {$row->id}";
 			mysql_query($query);
 			$response['user'] = $row->id;
 			$response['result'] = 1;
@@ -138,6 +138,17 @@ function get_chat($from, $to) {
 
 	mysql_free_result($result);
 	return $messages;
+}
+
+if ($action == 'upload_photo')
+{
+	$user = isset($_GET['user']) ? (int) $_GET['user'] : 0;
+	$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+	$filename = md5($user.$_FILES['file']['name']).'.'.$ext;
+	move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $filename);
+
+	$query = "UPDATE users SET photo = '{$filename}' WHERE id = {$user}";
+	mysql_query($query);
 }
 
 die(json_encode($response));

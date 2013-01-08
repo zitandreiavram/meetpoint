@@ -33,18 +33,15 @@
 	<a href="#" class="btn large nav" id="register">Register</a>
 	<a href="#" class="btn large nav" id="login">Login</a>
 	<a href="#" class="btn large nav" id="notification">Notification</a>
+	<a href="#" class="btn large nav" onclick="capturePhoto();">Capture Photo</a>
+	<a href="#" class="btn large nav" onclick="getPhoto();">Photo From Phone</a>
+	<img id="smallImage" src="" alt="" style="display:none;width: 90%" />
 
 	<div class="info register">
 		<h4>Register</h4>
 		<form id="register_form">
 			<input type="text" name="email" placeholder="Email" /><br />
 			<input type="text" name="password" placeholder="Password" /><br />
-			Photo:<br />
-			- <button onclick="capturePhoto();">Capture Photo</button> <br />
-			- <button onclick="getPhoto();">From Photo Library</button><br />
-   			- <button onclick="getPhoto();">From Photo Album</button><br />
-   			<img id="smallImage" src="" alt="" style="display:none" />
-			<br />
 			<a href="#" id="register_action">GO</a>
 			<input type="hidden" name="action" value="register" />
 		</form>

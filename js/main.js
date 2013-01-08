@@ -246,6 +246,7 @@ function get_user() {
 
 function message(text) {
 	jQuery('#message').html(text).show();
+	navigator.notification.alert(text, function(){}, 'Title', 'OK');
 }
 
 function is_logged() {
@@ -301,6 +302,8 @@ function onPhotoDataSuccess(imageData) {
   //
 //  smallImage.src = "data:image/jpeg;base64," + imageData;
   smallImage.src = imageData;
+  
+  upload_photo(imageData);
 }
 
 //Called when a photo is successfully retrieved
@@ -311,7 +314,6 @@ function onPhotoURISuccess(imageURI) {
 
   // Get image handle
   //
-	alert(imageURI);
   var largeImage = document.getElementById('smallImage');
 
   // Unhide image elements
@@ -322,14 +324,52 @@ function onPhotoURISuccess(imageURI) {
   // The inline CSS rules are used to resize the image
   //
   largeImage.src = imageURI;
+  
+  
+  upload_photo(imageURI);
+}
+
+function upload_photo(fileURI) {
+	var options = new FileUploadOptions();
+	options.fileKey="file";
+	options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
+	options.mimeType="image/jpeg";
+
+	var params = new Object();
+	params.user = get_user().user;
+	
+	options.params = params;
+
+	var ft = new FileTransfer();
+	ft.upload(fileURI, url + '?action=upload_photo', upload_photo_win, upload_photo_fail, options);
+}
+
+function upload_photo_win (r) {
+	message('Photo uploaded');
+//	console.log("Code = " + r.responseCode);
+//	console.log("Response = " + r.response);
+//	console.log("Sent = " + r.bytesSent);
+}
+
+function upload_photo_fail (error) {
+	message('An error has occurred: Code = ' + error.code);
 }
 
 function capturePhoto() {
+	if (is_logged()) {
+		message('Please login');
+		return false;
+	}
     // Take picture using device camera and retrieve image as base64-encoded string
 	navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 80 });
 }
 
 function getPhoto() {
+	if (is_logged()) {
+		message('Please login');
+		return false;
+	}
+	
 	var source = pictureSource.PHOTOLIBRARY;
 	//pictureSource.SAVEDPHOTOALBUM
 
