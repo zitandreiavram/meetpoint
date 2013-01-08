@@ -53,12 +53,22 @@ jQuery(document).ready(function($) {
 			$('.logout').hide();
 			$('.main').show();
 			$('.map').hide();
+			$('#send_message').hide();
 			localStorage.removeItem('_app_data');
 		})
 	})
 	
 	$('#show_the_map').bind('click', function() {
 		$('#send_message').hide();
+		$('.main').hide();
+		$('.map').show();
+		return false;
+	})
+	
+	$('#show_main').bind('click', function() {
+		$('#send_message').hide();
+		$('.map').hide();
+		$('.main').show();
 		return false;
 	})
 	
