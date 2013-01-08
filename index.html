@@ -25,7 +25,7 @@
 	
 </head>
 <body id="stage" class="theme">
-<h1>MeetPoint <span class="logout">[<a href="#" id="logout">logout</a>]</span></h1>
+<h1>MeetPoint <span class="logout">[<a href="#" id="logout">logout</a> | <a href="#" id="show_the_map">map</a>]</span></h1>
 
 <div class="main">
 	
@@ -38,6 +38,12 @@
 		<form id="register_form">
 			<input type="text" name="email" placeholder="Email" /><br />
 			<input type="text" name="password" placeholder="Password" /><br />
+			Photo:<br />
+			- <button onclick="capturePhoto();">Capture Photo</button> <br />
+			- <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br />
+   			- <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br />
+   			<img id="smallImage" />
+			<br />
 			<a href="#" id="register_action">GO</a>
 			<input type="hidden" name="action" value="register" />
 		</form>
@@ -50,6 +56,8 @@
 			<input type="text" name="password" placeholder="Password" /><br />
 			<a href="#" id="login_action">GO</a>
 			<input type="hidden" name="action" value="login" />
+			<input type="hidden" name="lat" id="login_lat" value="0" />
+			<input type="hidden" name="long" id="login_long" value="0" />
 		</form>
 	</div>
 	
@@ -60,8 +68,14 @@
 </div>
 
 <div class="send_message" id="send_message">
-	Message to: <span id="to"></span> <br /><br />
+	<div id="chat">
+		
+	</div>
+	<hr />
+	Message to: <span id="to_name"></span> <br /><br />
 	<form id="send_message_form">
+		<input type="hidden" name="to" id="to" value="" />
+		<input type="hidden" name="from" id="from" value="" />
 		<textarea id="message_content" name="message"></textarea> <br />
 		<input type="hidden" name="action" value="send_message" />
 	</form>
