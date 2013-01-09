@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+		xmlns:gap = "http://phonegap.com/ns/1.0"
+		id        = "com.phonegap.example"
+		versionCode="10" 
+		version   = "1.0.0">
+
+	<name>MeetPoint</name>
+
+	<description>
+		MeetPoint DEV
+	</description>
+
+	<author href="https//www.zit.ro" email="office@zit.ro">
+		ZIT
+	</author>
+
+	<preference name="phonegap-version" value="2.0.0" />
+
+	<gap:platforms>
+		<gap:platform name="android" minVersion="2.1" />
+		<gap:platform name="ios" />
+	</gap:platforms>
+
+	<gap:splash src="images/splash/640x960.jpg" width="320" height="480" />
+	<gap:splash src="images/splash/640x960.jpg" width="640" height="960" />
+
+	<feature name="http://api.phonegap.com/1.0/camera" />
+	<feature name="http://api.phonegap.com/1.0/geolocation" />
+	<feature name="http://api.phonegap.com/1.0/file" />
+
+</widget>
