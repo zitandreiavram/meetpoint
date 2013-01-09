@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta name="viewport" content="initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	<meta charset="utf-8">
 	<title>Meetpoint</title>
 	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" charset="utf-8">
@@ -67,7 +67,49 @@
 
 		<div id="register" class="register screen">
 			<form id="form_register" class="form_register">
-				
+				<table>
+					<tr>
+						<td>Email</td>
+						<td><input type="text" name="email" placeholder="Adresse email" /></td>
+					</tr>
+					<tr>
+						<td>Confirmer email</td>
+						<td><input type="text" name="confirm_email" placeholder="Confirmer email" /></td>
+					</tr>
+					<tr>
+						<td>Mot de passe</td>
+						<td><input type="password" name="password" placeholder="Mot de passe" /></td>
+					</tr>
+					<tr>
+						<td>Pseudo</td>
+						<td><input type="text" name="username" placeholder="Pseudo" /></td>
+					</tr>
+					<tr>
+						<td>Je suis</td>
+						<td><input type="checkbox" name="sex" value="male" id="form_register_sex" /></td>
+					</tr>
+					<tr>
+						<td>Né(e) le</td>
+						<td><input type="date" name="date" placeholder="date" /></td>
+					</tr>
+					<tr>
+						<td>Pays</td>
+						<td>
+							<select name="country">
+								<option value="1">France</option>
+								<option value="2">Belgique</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
 				<br />
 				<br />
 				<br />
@@ -83,7 +125,7 @@
 
 </div>
 
-<div data-role="footer" class="ui-bar"  data-position="fixed">
+<div data-role="footer" class="ui-bar" data-position="fixed">
 	<a href="index.html" data-role="button" data-icon="plus">Add</a>
 	<a href="index.html" data-role="button" data-icon="arrow-u">Up</a>
 	<a href="index.html" data-role="button" data-icon="arrow-d">Down</a>
