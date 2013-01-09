@@ -34,9 +34,10 @@ td {
 	background: url(../images/background.jpg);
 	background-attachment: fixed;
 	width: 320px;
-	height: 480px;
+/*	height: 480px;*/
 	position: absolute;
 	font-family: Verdana;
+	padding-bottom: 50px;
 }
 
 .page {
