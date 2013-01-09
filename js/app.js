@@ -6,7 +6,7 @@ var watchID;
 
 jQuery(document).ready(function($) {
 	
-	alert(screen.width + ' ' + screen.height);
+//	alert(screen.width + ' ' + screen.height);
 	
 	$('#home').bind('click', function() {
 		$('#index').show();
