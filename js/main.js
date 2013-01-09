@@ -193,6 +193,8 @@ function listenOnSuccess(position) {
 		long: position.coords.longitude
 	}
 	
+	message(position.coords.latitude + ', ' + position.coords.longitude);
+	
 	$.post(url, params, function(data) {
 	}, 'JSON')
 }
