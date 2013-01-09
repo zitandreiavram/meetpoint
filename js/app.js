@@ -6,6 +6,8 @@ var watchID;
 
 jQuery(document).ready(function($) {
 	
+	alert(screen.width + ' ' + screen.height);
+	
 	$('#home').bind('click', function() {
 		$('#index').show();
 		$('#wrap, #login, #register').hide();
@@ -24,10 +26,13 @@ jQuery(document).ready(function($) {
 		return false;
 	})
 	
+	
+	/*
 	$('#form_register_sex').iphoneStyle({
 		checkedLabel: 'YES',
 		uncheckedLabel: 'NO'
 	});
+	*/
 	
 	
 	return false;
