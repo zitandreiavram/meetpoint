@@ -6,8 +6,6 @@ var watchID;
 
 jQuery(document).ready(function($) {
 	
-	alert(screen.width);
-	
 	$('#home').bind('click', function() {
 		$('#index').show();
 		$('#wrap, #login, #register').hide();
