@@ -12,7 +12,16 @@ jQuery(document).ready(function($) {
 		return false;
 	})
 	
+	$('#button_register').bind('click', function() {
+		$('#index').hide();
+		$('#wrap, #register').show();
+		return false;
+	})
 	
+	$('#form_register_sex').iphoneStyle({
+		checkedLabel: 'YES',
+		uncheckedLabel: 'NO'
+	});
 	
 	
 	return false;
