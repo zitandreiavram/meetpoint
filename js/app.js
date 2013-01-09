@@ -6,6 +6,12 @@ var watchID;
 
 jQuery(document).ready(function($) {
 	
+	$('#home').bind('click', function() {
+		$('#index').show();
+		$('#wrap, #login, #register').hide();
+		return false;
+	})
+	
 	$('#button_login').bind('click', function() {
 		$('#index').hide();
 		$('#wrap, #login').show();
