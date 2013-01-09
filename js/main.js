@@ -193,6 +193,8 @@ function listenOnSuccess(position) {
 		long: position.coords.longitude
 	}
 	
+	add_point({latitude: position.coords.latitude, longitude: position.coords.longitude}, true);
+	
 	jQuery('#message').html(position.coords.latitude + ', ' + position.coords.longitude).show();
 	
 	$.post(url, params, function(data) {
@@ -203,7 +205,6 @@ function listenOnError(error) {
 //	alert('code: '    + error.code    + '\n' +
 //            'message: ' + error.message + '\n');
 }
-
 
 
 function map() {
@@ -218,6 +219,8 @@ function map() {
 	});
 }
 
+var marker_me;
+
 function add_point(position, me, user) {
 	if (me == undefined) {
 		me = false;
@@ -226,8 +229,14 @@ function add_point(position, me, user) {
 	var infoWindow = new google.maps.InfoWindow({});
 	
 	if (me) {
+		if (marker_me) {
+			marker_me.setMap(null);
+		}
+		
+		
 		var clientPosition = new google.maps.LatLng(position.latitude, position.longitude);
 		$('#map_canvas').gmap('addMarker', {'position': clientPosition, 'bounds': true, 'icon': 'images/me.png', 'animation': google.maps.Animation.DROP}, function(map, marker) {
+			marker_me = marker;
 			google.maps.event.addListener(marker, 'click', function() {
 			    infoWindow.setContent('THIS IS ME');
 			    infoWindow.open(map,marker);
