@@ -193,7 +193,7 @@ function listenOnSuccess(position) {
 		long: position.coords.longitude
 	}
 	
-	message(position.coords.latitude + ', ' + position.coords.longitude);
+	jQuery('#message').html(position.coords.latitude + ', ' + position.coords.longitude).show();
 	
 	$.post(url, params, function(data) {
 	}, 'JSON')
