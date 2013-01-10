@@ -73,7 +73,7 @@ var User = {
 		})
 	},
 	
-	populateCountriesSelect: function(){
+	populateCountriesSelect2: function(){
 		  var select = $('#form_register_country'),
 		      tempSelect = $('<select />');
 		 
@@ -90,10 +90,10 @@ var User = {
 		  delete tempSelect;
 		},//populateCountriesSelect
 	
-	populateCountriesSelect2: function() {
+	populateCountriesSelect: function() {
 		var select = $('#form_register_country');
 		
-		//select.empty();
+		select.empty();
 		
 		$(User.countries).each(function() {
 			select.append($('<option />').val(this.id).text(this.name))
