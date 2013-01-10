@@ -73,10 +73,25 @@ var User = {
 		})
 	},
 	
-	populateCountriesSelect: function() {
+	populateCountriesSelect: function(){
+		  var select = $('#form_register_country'),
+		      tempSelect = $('<select />');
+		 
+		  $( User.countries ).each(function(index, opt){
+		    var option = $('<option />').attr({
+		      value : opt.id
+		    }).text( opt.name );
+		    option.appendTo( tempSelect );
+		  });
+		 
+		  select.html( tempSelect.html() );
+		  delete tempSelect;
+		},//populateCountriesSelect
+	
+	populateCountriesSelect2: function() {
 		var select = $('#form_register_country');
 		
-		select.find('option').remove();
+		//select.empty();
 		
 		$(User.countries).each(function() {
 			select.append($('<option />').val(this.id).text(this.name))
