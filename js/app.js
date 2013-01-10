@@ -1,12 +1,16 @@
 
 // Wait for PhoneGap to connect with the device
 document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("resume", onResume, false);
 
 function onDeviceReady() {
 //	Map.init();
 	Lang.init();
 }
 
+function onResume() {
+	$('#map_canvas').hide();
+}
 
 var watchID;
 

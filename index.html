@@ -8,8 +8,13 @@
 	
 	<!-- Config -->
 	<script>
-		//var url = 'http://localhost/meetpoint/app/';
-		var url = 'http://www.crma.ro/meetpoint/app/';
+		if (typeof window.location != 'undefined' && window.location.href.indexOf('localhost') >= 0) {
+			var url = 'http://localhost/meetpoint/app/';
+		}
+		else {
+			var url = 'http://www.crma.ro/meetpoint/app/';
+		}
+		
 		var default_language = 'fr';
 	</script>
 	
@@ -47,7 +52,6 @@
 	<!-- Plugins -->
 	<script src="js/plugins/iphone-style-checkboxes/iphone-style-checkboxes.js"></script>
 	<link rel="stylesheet" href="js/plugins/iphone-style-checkboxes/style.css" />
-	<script src="js/plugins/jquery.selectboxes.js"></script>
 	
 	<!-- App -->
 	<link rel="stylesheet" href="css/app.css" type="text/css" media="screen" charset="utf-8">
@@ -131,7 +135,7 @@
 			</form>
 		</div>
 		
-		<div id="map_canvas" style="width:100%;height: 490px;"></div>
+		<div id="map_canvas" style="width:100%;height: 490px;margin-top:80px"></div>
 		
 	</div>
 	
