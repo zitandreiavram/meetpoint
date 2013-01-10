@@ -2,6 +2,16 @@ body {
 	font-family: Verdana;
 }
 
+#loading {
+	width: 220px;
+	height: 19px;
+	background: url(../images/loading.gif);
+	position: absolute;
+	left: 50px;
+	top: 366px;
+	z-index: 1;
+}
+
 #home {
 	position: absolute;
 	display: block;
@@ -105,4 +115,8 @@ a.button:hover {
 @media (max-width: 640px) {
 
 	
+}
+
+.hidden {
+	display: none !important;
 }

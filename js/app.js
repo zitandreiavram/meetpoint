@@ -14,9 +14,18 @@ jQuery(document).ready(function($) {
 	
 	Lang.init();
 	
-	if ( ! User.isLogged()) {
+	if (User.isLogged()) {
+		$('#index').hide();
+		$('#wrap').show();
+		Map.init();
+		$('#loading').hide();
+		$('#button_login, #button_register').removeClass('hidden');
+		$('#footer').show();
+	}
+	else {
 		User.getCountries();
 	}
+	
 	
 //	alert(screen.width + ' ' + screen.height);
 	

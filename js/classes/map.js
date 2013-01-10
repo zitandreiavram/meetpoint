@@ -1,16 +1,17 @@
 var Map = {
 
-	map_canvas: $('#map_canvas'),
+	map_canvas: null,
 	watchID: null,
 	markers: [],
 	marker_me: null,
 	
 	init: function() {
+		Map.map_canvas = $('#map_canvas');
+		
 		Map.map_canvas.gmap().bind('init', function(evt, map) {
-			
 			Map.map_canvas.gmap('getCurrentPosition', function(position, status) {
 				if ( status === 'OK' ) {
-					Map.addPoint({lat: position.coords.latitude, longitude: position.coords.longitude, id: User.id, username: User.username});
+					Map.addPoint({me: true, lat: position.coords.latitude, long: position.coords.longitude, id: User.id, username: User.username});
 				}
 			});
 			
@@ -20,10 +21,9 @@ var Map = {
 	addPoint: function(data) {
 		
 		var infoWindow = new google.maps.InfoWindow({});
-		var me = data.id == User.id;
-		var clientPosition = new google.maps.LatLng(position.latitude, position.longitude);
+		var clientPosition = new google.maps.LatLng(data.lat, data.long);
 		
-		if (me) {
+		if (data.me) {
 			if (marker_me) {
 				marker_me.setMap(null);
 			}

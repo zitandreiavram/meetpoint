@@ -55,10 +55,12 @@
 </head>
 <body>
 
+<div id="loading"></div>
+
 <div id="index" class="index">
 	<div class="inner">
-		<a href="#" class="button lang" lang="login" id="button_login">Connexion</a>
-		<a href="#" class="button lang" lang="register" id="button_register">Inscription</a>
+		<a href="#" class="button lang hidden" lang="login" id="button_login">Connexion</a>
+		<a href="#" class="button lang hidden" lang="register" id="button_register">Inscription</a>
 	</div>
 </div><!-- index -->
 
@@ -129,6 +131,8 @@
 			</form>
 		</div>
 		
+		<div id="map_canvas" style="width:100%;height: 490px;"></div>
+		
 	</div>
 	
 
@@ -144,8 +148,8 @@
 
  -->
  
-<div style="position: fixed;width: 100%;bottom: 0;height: 40px;background: #ff0000;">
-asd
+<div id="footer" style="position: fixed;width: 100%;bottom: 0;height: 40px;background: #474d5b;display:none">
+
 </div>
 	
 </body>

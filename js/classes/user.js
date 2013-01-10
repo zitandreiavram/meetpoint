@@ -19,8 +19,13 @@ var User = {
 					
 					Map.init();
 					
+					$('#login, #register').hide();
+					$('#map_canvas').show();
+					
 					var options = { frequency: 3000 };
 				    User.watchID = navigator.geolocation.watchPosition(listenOnSuccess, listenOnError, options);
+				    
+				    $('#footer').show();
 					
 //					listen();
 //					map();
@@ -81,6 +86,9 @@ var User = {
 		$(User.countries).each(function() {
 			select.append($('<option />').val(this.id).text(this.name))
 		})
+		
+		$('#loading').hide();
+		$('#button_login, #button_register').removeClass('hidden');
 	}
 	
 }
