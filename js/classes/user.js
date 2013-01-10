@@ -85,6 +85,8 @@ var User = {
 		  });
 		 
 		  select.html( tempSelect.html() );
+		  select.selectmenu('refresh');
+		  select.trigger('create')
 		  delete tempSelect;
 		},//populateCountriesSelect
 	
