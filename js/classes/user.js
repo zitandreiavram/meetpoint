@@ -73,7 +73,7 @@ var User = {
 		})
 	},
 	
-	populateCountriesSelect2: function(){
+	populateCountriesSelect: function(){
 		  var select = $('#form_register_country'),
 		      tempSelect = $('<select />');
 		 
@@ -85,12 +85,12 @@ var User = {
 		  });
 		 
 		  select.html( tempSelect.html() );
-		  select.selectmenu('refresh');
-		  select.trigger('create')
+//		  select.selectmenu('refresh');
+//		  select.trigger('create')
 		  delete tempSelect;
 		},//populateCountriesSelect
 	
-	populateCountriesSelect: function() {
+	populateCountriesSelect2: function() {
 		var select = $('#form_register_country');
 		
 		select.empty();
