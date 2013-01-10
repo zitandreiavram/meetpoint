@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 	
 	Lang.init();
 	
-	if (User.isLogged()) {
+	if ( ! User.isLogged()) {
 		User.getCountries();
 	}
 	
