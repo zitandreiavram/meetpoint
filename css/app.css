@@ -31,8 +31,9 @@ td {
 
 .wrap {
 	display: none;
-	background: url(../images/background.jpg);
+	background: #474d5b url(../images/background.jpg);
 	background-attachment: fixed;
+	background-repeat: no-repeat;
 	width: 320px;
 /*	height: 480px;*/
 	position: absolute;

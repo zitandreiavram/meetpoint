@@ -1,4 +1,5 @@
 var en = {
-	register: 'Register',
 	login: 'Login',
+	register: 'Register',
+	email: 'E-mail',
 }

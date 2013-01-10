@@ -1,12 +1,24 @@
 
-var url = 'http://localhost/meetpoint/app/';
-//var url = 'http://www.crma.ro/meetpoint/dev/app/';
+// Wait for PhoneGap to connect with the device
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+//	Map.init();
+	Lang.init();
+}
+
 
 var watchID;
 
 jQuery(document).ready(function($) {
 	
-	alert(screen.width + ' ' + screen.height);
+	Lang.init();
+	
+	if (User.isLogged()) {
+		User.getCountries();
+	}
+	
+//	alert(screen.width + ' ' + screen.height);
 	
 	$('#home').bind('click', function() {
 		$('#index').show();
@@ -26,13 +38,22 @@ jQuery(document).ready(function($) {
 		return false;
 	})
 	
+	$('#submit_register').bind('click', function() {
+		User.register($('#form_register').serialize())
+	})
 	
-	/*
+	$('#submit_login').bind('click', function() {
+		if ($.trim($('#form_login_email').val()) == '' || $.trim($('#form_login_password').val()) == '') {
+			return false;
+		}
+		
+		User.login($('#form_login').serialize())
+	})
+	
 	$('#form_register_sex').iphoneStyle({
-		checkedLabel: 'YES',
-		uncheckedLabel: 'NO'
+		checkedLabel: 'F',
+		uncheckedLabel: 'M'
 	});
-	*/
 	
 	
 	return false;
@@ -58,7 +79,7 @@ jQuery(document).ready(function($) {
 		}, 'JSON')
 	})
 	
-	$('#login_action').bind('click', function() {
+	$('#login_action2').bind('click', function() {
 		navigator.geolocation.getCurrentPosition(function(p) {
 			$('#login_lat').val(p.coords.latitude);
 			$('#login_long').val(p.coords.longitude);
@@ -311,8 +332,12 @@ function get_user() {
 }
 
 function message(text) {
-	jQuery('#message').html(text).show();
-	navigator.notification.alert(text, function(){}, 'Title', 'OK');
+	if (typeof navigator.notification == 'undefined') {
+		alert(text);
+	}
+	else {
+		navigator.notification.alert(text, function(){}, 'Title', 'OK');
+	}
 }
 
 function is_logged() {
@@ -343,7 +368,7 @@ document.addEventListener("deviceready",onDeviceReady,false);
 
 // PhoneGap is ready to be used!
 //
-function onDeviceReady() {
+function onDeviceReady2() {
     pictureSource=navigator.camera.PictureSourceType;
     destinationType=navigator.camera.DestinationType;
 }

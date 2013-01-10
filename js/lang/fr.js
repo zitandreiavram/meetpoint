@@ -1,4 +1,6 @@
 var fr = {
-	register: 'Enregistrer',
-	login: 'Identifier',
+	login: 'Connexion',
+	register: 'Inscription',
+	email: 'Email',
+	
 }
