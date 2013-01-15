@@ -243,23 +243,29 @@ var User = {
 			var data = form.serialize() + '&id=' + User.id;
 			
 			$.post(url + 'main/profile', data, function(result) {
+				// Upload photo
+				var uri = $('#profile_photo_field').val();
 				User.response = result.code;
 				
-				// Upload photo
-				var uri = $('#profile_photo').attr('src');
-				
-				var options = new FileUploadOptions();
-				options.fileKey = 'file';
-				options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
-				options.mimeType = 'image/jpg';
-	
-				var params = new Object();
-				params.user = User.id;
-				
-				options.params = params;
-	
-				var ft = new FileTransfer();
-				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
+				if (uri) {
+					var options = new FileUploadOptions();
+					options.fileKey = 'file';
+					options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
+					options.mimeType = 'image/jpg';
+		
+					var params = new Object();
+					params.user = User.id;
+					
+					options.params = params;
+		
+					var ft = new FileTransfer();
+					ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
+				}
+				else {
+					message(_(result.code));
+					User.getEngine();
+					$('#tab_engine').show();
+				}
 				
 			}, 'JSON')
 		}
