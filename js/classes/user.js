@@ -31,10 +31,7 @@ var User = {
 					
 					if (User.allow_search == true) {
 						Map.init();
-						
-						var options = { frequency: 3000 };
-					    User.watchID = navigator.geolocation.watchPosition(listenOnSuccess, listenOnError, options);
-					    
+						Map.watchPosition();
 					    User.updatePresence();
 					}
 					else {
@@ -316,6 +313,7 @@ var User = {
 		var data = form.serialize() + '&id=' + User.id;
 		
 		$.post(url + 'main/engine', data, function(result) {
+			User.allow_search = true;
 			$('#tab_engine').hide();
 			Map.show();
 		}, 'JSON')
@@ -323,7 +321,6 @@ var User = {
 	
 	uploadFileSucces: function(r) {
 		message(_(User.response));
-		User.allow_search = true;
 		User.getEngine();
 		$('#tab_engine').show();
 	},

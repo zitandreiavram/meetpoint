@@ -126,6 +126,7 @@ a.button:hover {
 
 #footer {
 	position: fixed;
+	z-index: 100;
 	width: 100%;
 	bottom: 0;
 	height: 39px;
