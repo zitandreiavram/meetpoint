@@ -17,9 +17,6 @@ var Tools = {
 		var pictureSource = navigator.camera.PictureSourceType;
 		var destinationType = navigator.camera.DestinationType
 		var source = pictureSource.PHOTOLIBRARY; // pictureSource.SAVEDPHOTOALBUM
-		alert(pictureSource);
-		alert(destinationType);
-		alert(source);
 		
 	    // Retrieve image file location from specified source
 	    navigator.camera.getPicture(capturePhotoSuccess, capturePhotoFail, { quality: 60, 

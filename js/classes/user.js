@@ -254,16 +254,19 @@ var User = {
 			
 			$.post(url + 'main/profile', data, function(result) {
 				User.response = result.code;
-				message(result.code);
-				return false;
+				alert(1);
 				
 				// Upload photo
 				var uri = $('#profile_photo').attr('src');
+				
+				alert('2' + uri);
 				
 				var options = new FileUploadOptions();
 				options.fileKey = 'file';
 				options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
 				options.mimeType = type;
+				
+				alert(3);
 	
 				var params = new Object();
 				params.user = User.id;
@@ -271,18 +274,15 @@ var User = {
 				options.params = params;
 	
 				var ft = new FileTransfer();
-				alert(err);
 				err += ' 7';
-				alert(err);
+				
+				alert(4);
 				
 				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
 				
 				
 			}, 'JSON')
 		}
-		
-		
-		alert(err);
 		
 	},
 	
@@ -339,7 +339,7 @@ var User = {
 		}, 'JSON')
 	},
 	
-	uploadFileSucces: function(response) {
+	uploadFileSucces: function(r) {
 		message(_(User.response));
 		User.allow_search = true;
 	},
