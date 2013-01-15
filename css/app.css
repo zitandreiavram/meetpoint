@@ -121,7 +121,7 @@ a.button:hover {
 #map_canvas {
 /*	visibility: hidden;*/
 	position: absolute;
-	left: -9999px;
+	top: -9999px;
 }
 
 #footer {
@@ -139,7 +139,7 @@ a.button:hover {
 
 	#footer .tab {
 		display: inline-block;
-		width: 65px;
+		width: 67px;
 		height: 39px;
 		background: center top no-repeat;
 		color: #fff;

@@ -32,14 +32,14 @@ var Map = {
 	show: function() {
 //		Map.map_canvas.css('visibility', 'visible');
 		if (Map.map_canvas) {
-			Map.map_canvas.css('left', '0px');
+			Map.map_canvas.css('top', '67px');
 		}
 	},
 	
 	hide: function() {
 //		Map.map_canvas.css('visibility', 'hidden');
 		if (Map.map_canvas) {
-			Map.map_canvas.css('left', '-9999px');
+			Map.map_canvas.css('top', '-9999px');
 		}
 	},
 	
