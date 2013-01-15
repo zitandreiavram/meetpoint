@@ -254,6 +254,8 @@ var User = {
 			
 			$.post(url + 'main/profile', data, function(result) {
 				User.response = result.code;
+				message(result.code);
+				return false;
 				
 				// Upload photo
 				var uri = $('#profile_photo').attr('src');
@@ -271,10 +273,10 @@ var User = {
 				var ft = new FileTransfer();
 				alert(err);
 				err += ' 7';
+				alert(err);
 				
 				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
 				
-				alert(err);
 				
 			}, 'JSON')
 		}
