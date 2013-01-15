@@ -15,7 +15,7 @@ var Tools = {
 	
 	getPhotoFromPhone: function() {
 		var pictureSource = navigator.camera.PictureSourceType;
-		var destinationType = navigator.camera.DestinationType
+		var destinationType = navigator.camera.DestinationType;
 		var source = pictureSource.PHOTOLIBRARY; // pictureSource.SAVEDPHOTOALBUM
 		
 	    // Retrieve image file location from specified source

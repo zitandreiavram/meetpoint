@@ -211,18 +211,15 @@ var User = {
 	saveProfile: function() {
 		var form = $('#form_profile');
 		var error = false;
-		var err = '';
 		
 		form.find('select.interests').each(function(i, el) {
 			if ($(el).val() == 0) {
 				error = true;
-				err += ' 1';
 				return false;
 			}
 		})
 		
 		if ($('#profile_profession').val() == 0) {
-			err += ' 2';
 			error = true;
 		}
 		
@@ -239,38 +236,25 @@ var User = {
 		*/
 		
 		if ($('#profile_photo').attr('src') == '') {
-			err += ' 3';
 			error = true;
 		}
 		
 		if (error == true) {
 			message(_('profile_submit_error'));
-			err += ' 4';
 		}
 		else {
-			err += ' 5';
 			var data = form.serialize() + '&id=' + User.id;
-			err += ' 6';
 			
 			$.post(url + 'main/profile', data, function(result) {
 				User.response = result.code;
-				alert(1);
 				
 				// Upload photo
 				var uri = $('#profile_photo').attr('src');
 				
-				alert('2 ' + uri);
-				
 				var options = new FileUploadOptions();
-				alert(3);
 				options.fileKey = 'file';
-				alert(4);
 				options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
-				alert(5);
 				options.mimeType = 'image/jpg';
-				alert(6);
-				
-				
 	
 				var params = new Object();
 				params.user = User.id;
@@ -278,16 +262,10 @@ var User = {
 				options.params = params;
 	
 				var ft = new FileTransfer();
-				err += ' 7';
-				
-				alert(7);
-				
 				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
-				
 				
 			}, 'JSON')
 		}
-		
 	},
 	
 	getEngine: function() {
@@ -346,6 +324,8 @@ var User = {
 	uploadFileSucces: function(r) {
 		message(_(User.response));
 		User.allow_search = true;
+		User.getEngine();
+		$('#tab_engine').show();
 	},
 	
 	uploadFileFail: function(error) {
