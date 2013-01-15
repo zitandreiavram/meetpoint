@@ -243,9 +243,15 @@ var User = {
 			var data = form.serialize() + '&id=' + User.id;
 			
 			$.post(url + 'main/profile', data, function(result) {
+				if (result.error == true) {
+					message(_(result.code));
+					return false;
+				}
+					
+				User.response = result.code;
+				
 				// Upload photo
 				var uri = $('#profile_photo_field').val();
-				User.response = result.code;
 				
 				if (uri) {
 					var options = new FileUploadOptions();
@@ -262,9 +268,7 @@ var User = {
 					ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
 				}
 				else {
-					message(_(result.code));
-					User.getEngine();
-					$('#tab_engine').show();
+					User.uploadFileSucces();
 				}
 				
 			}, 'JSON')
@@ -321,6 +325,8 @@ var User = {
 		$.post(url + 'main/engine', data, function(result) {
 			User.allow_search = true;
 			$('#tab_engine').hide();
+			$('.tab').removeClass('active');
+			$('.tab_map').addClass('active');
 			Map.show();
 		}, 'JSON')
 	},
@@ -329,6 +335,10 @@ var User = {
 		message(_(User.response));
 		User.getEngine();
 		$('#tab_engine').show();
+		$('.tab').removeClass('active');
+		$('.tab_engine').addClass('active');
+		$('#tab_profile').hide();
+		console.log($('.tab_profile'))
 	},
 	
 	uploadFileFail: function(error) {

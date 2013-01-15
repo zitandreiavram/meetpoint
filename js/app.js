@@ -43,6 +43,7 @@ jQuery(document).ready(function($) {
 		if (User.allow_search == true) {
 			User.updatePresence();
 			Map.init();
+			$('.tab_map').addClass('active');
 		}
 		else {
 			User.getProfile();
@@ -51,6 +52,9 @@ jQuery(document).ready(function($) {
 	}
 	else {
 		User.getCountries();
+		$('#form_login_email').val('zit_andreiavram@yahoo.com');
+		$('#form_login_password').val('parola');
+		User.login($('#form_login').serialize())
 	}
 	
 	$('#home').bind('click', function() {
