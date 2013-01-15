@@ -106,16 +106,70 @@ a.button:hover {
 			color: #fff;
 			font-weight: strong;
 			font-size: 12px;
+			vertical-align: top;
 		}
-		.form_register td input {
-	/*		height: */
-		}
-
-	
-@media (max-width: 640px) {
-
-	
+		
+.profile {
+	display: none;
 }
+		
+		
+.engine {
+	display: none;
+}
+		
+#map_canvas {
+/*	visibility: hidden;*/
+	position: absolute;
+	left: -9999px;
+}
+
+#footer {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 39px;
+	border-top: 1px #000 solid;
+	background: #474d5b;
+	display: none;
+	background-color: #252828;
+	text-align: center;
+}
+
+	#footer .tab {
+		display: inline-block;
+		width: 95px;
+		height: 39px;
+		background: center top no-repeat;
+		color: #fff;
+		font-size: 11px;
+		line-height: 65px;
+		text-shadow: none;
+	}
+	
+	#footer .tab:hover {
+		text-decoration: none;
+	}
+	
+	#footer .tab_profile {
+		background-image: url(../images/tab_profile.png);
+	}
+	
+	#footer .tab_engine {
+		background-image: url(../images/tab_engine.png);
+	}
+	
+	#footer .tab_map {
+		background-image: url(../images/tab_map.png);
+	}
+	
+	#footer .tab_chat {
+		background-image: url(../images/tab_chat.png);
+	}
+	
+	#footer .active {
+		background-color: #464949;
+	}
 
 .hidden {
 	display: none !important;

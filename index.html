@@ -16,6 +16,7 @@
 		}
 		
 		var default_language = 'fr';
+		var distance_options = [1, 2, 3, 4, 5, 6, 7];
 	</script>
 	
 	<!-- jQuery -->
@@ -65,6 +66,7 @@
 	<div class="inner">
 		<a href="#" class="button lang hidden" lang="login" id="button_login">Connexion</a>
 		<a href="#" class="button lang hidden" lang="register" id="button_register">Inscription</a>
+		<a href="#" class="button lang hidden" lang="logout" id="button_logout">Logout</a>
 	</div>
 </div><!-- index -->
 
@@ -118,42 +120,142 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
+						<td><br /><br /><a href="#" class="button lang" lang="register" id="submit_register">Register</a></td>
 					</tr>
 				</table>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<a href="#" class="button lang" lang="register" id="submit_register">Register</a>
+				<br /><br />
+			</form>
+		</div>
+
+		<div id="tab_profile" class="profile screen">
+			<form id="form_profile" class="form_register">
+				<table>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td class="lang" lang="you_are">Vous êtes</td>
+						<td id="profile_sex"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td class="lang" lang="age">Age</td>
+						<td id="profile_age"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td class="lang" lang="interests">Interests</td>
+						<td>
+							<select class="interests" name="interests[]" id="profile_interests_1"></select><br />
+							<select class="interests" name="interests[]" id="profile_interests_2"></select><br />
+							<select class="interests" name="interests[]" id="profile_interests_3"></select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td class="lang" lang="profession">Profession</td>
+						<td><select name="profession" id="profile_profession"></select></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<!-- 
+					<tr>
+						<td class="lang" lang="searching_for">Je recherche quelqu’un pour</td>
+						<td><span id="profile_search"></span></td>
+					</tr>
+					 -->
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td class="lang" lang="send_photo">Envoyer une photo</td>
+						<td>
+							<a href="#" class="button lang" lang="capture_photo" id="photo_capture">Capture</a><br /><br />
+							<a href="#" class="button lang" lang="from_library" id="photo_library">From library</a><br /><br />
+							<img src="" id="profile_photo" alt="" style="display: none; width: 100%;" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<a href="#" class="button lang" lang="save" id="submit_profile">Save</a>
+						</td>
+					</tr>
+				</table>
+				<br /><br />
+			</form>
+		</div>
+
+		<div id="tab_engine" class="engine screen">
+			<form id="form_engine" class="form_register">
+				<table>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="lang" lang="i_am_searching" style="font-weight: bold;">Je recherche</td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="lang" lang="man_or_woman">man or woman</td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" name="sex" value="1" id="form_engine_sex" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="lang" lang="in_order_to">2. Dans le but de</td>
+					</tr>
+					<tr>
+						<td><span id="engine_search"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="lang" lang="situated" style="font-weight: bold;">Situé</td>
+					</tr>
+					<tr>
+						<td colspan="2"><select name="distance" id="engine_distance"></select></td>
+					</tr>
+					<tr>
+						<td colspan="2"><br /><br /></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<a href="#" class="button lang" lang="search" id="submit_search">Save</a>
+						</td>
+					</tr>
+				</table>
+				<br /><br />
 			</form>
 		</div>
 		
-		<div id="map_canvas" style="width:100%;height: 350px;margin-top:0px"></div>
+		<div id="map_canvas" style="width:100%;height: 372px;"></div>
 		
 	</div>
 	
 
 </div>
 
-<!-- 
-
-<div data-role="footer" class="ui-bar" data-position="fixed">
-	<a href="index.html" data-role="button" data-icon="plus">Add</a>
-	<a href="index.html" data-role="button" data-icon="arrow-u">Up</a>
-	<a href="index.html" data-role="button" data-icon="arrow-d">Down</a>
-</div>
-
- -->
- 
-<div id="footer" style="position: fixed;width: 100%;bottom: 0;height: 40px;background: #474d5b;display:none">
-
+<div id="footer">
+	<a href="#tab_profile" class="tab tab_profile lang" lang="profile">PROFILE</a>
+	<a href="#tab_engine" class="tab tab_engine lang" lang="engine">engine</a>
+	<a href="#tab_map" class="tab tab_map lang" lang="map" id="tab_map">CARTE</a>
+	<a href="#tab_chat" class="tab tab_chat lang" lang="chat">CHAT</a>
 </div>
 	
 </body>
