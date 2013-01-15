@@ -52,9 +52,9 @@ jQuery(document).ready(function($) {
 	}
 	else {
 		User.getCountries();
-		$('#form_login_email').val('zit_andreiavram@yahoo.com');
-		$('#form_login_password').val('parola');
-		User.login($('#form_login').serialize())
+//		$('#form_login_email').val('zit_andreiavram@yahoo.com');
+//		$('#form_login_password').val('parola');
+//		User.login($('#form_login').serialize())
 	}
 	
 	$('#home').bind('click', function() {

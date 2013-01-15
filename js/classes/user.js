@@ -6,7 +6,7 @@ var User = {
 	countries: [],
 	response: null,
 	updatePresenceInterval: null,
-	updatePresenceIntervalTime: 60000,
+	updatePresenceIntervalTime: update_presence_time,
 	loadProfile: true,
 	loadEngine: true,
 	
@@ -346,7 +346,6 @@ var User = {
 	},
 	
 	updatePresence: function() {
-		
 		updatePresenceInterval = window.setInterval(function() {
 			$.get(url + 'main/online', {user: User.id})
 		}, User.updatePresenceIntervalTime)
