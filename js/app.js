@@ -225,7 +225,7 @@ function message(text) {
 		alert(text);
 	}
 	else {
-		navigator.notification.alert(text, function(){}, 'Title', 'OK');
+		navigator.notification.alert(text, function(){}, _('notification_title'), _('notification_ok'));
 	}
 }
 

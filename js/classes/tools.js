@@ -5,8 +5,8 @@ var Tools = {
 	},
 	
 	capturePhotoSuccess: function(link) {
-		$('#profile_photo').attr('src', link);
-		  upload_photo(imageData);
+		$('#profile_photo').attr('src', link).show();
+//		  upload_photo(imageData);
 	},
 	
 	capturePhotoFail: function() {

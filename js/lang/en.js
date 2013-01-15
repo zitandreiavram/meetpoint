@@ -3,6 +3,8 @@ var en = {
 	logout: 'Logout',
 	register: 'Register',
 	email: 'E-mail',
+	check_email: 'Check your email to confirm',
+	bad_login: 'Bad login data',
 	profile: 'PROFILE',
 	map: 'MAP',
 	chat: 'CHAT',
@@ -32,5 +34,7 @@ var en = {
 	distance_5: 'Less than 100km',
 	distance_6: 'Less than 500km',
 	distance_7: 'Less than 1000Km',
-	search: 'Search'
+	search: 'Search',
+	notification_title: 'Message',
+	notification_ok: 'OK'
 }

@@ -3,6 +3,8 @@ var fr = {
 	logout: 'Deconnexion',
 	register: 'Inscription',
 	email: 'Email',
+	check_email: 'Check your email to confirm',
+	bad_login: 'Bad login data',
 	profile: 'PROFILE',
 	map: 'CARTE',
 	chat: 'CHAT',
@@ -32,5 +34,7 @@ var fr = {
 	distance_5: 'A moins de 100km',
 	distance_6: 'A moins de 500km',
 	distance_7: 'A moins de 1000Km',
-	search: 'Recherche'
+	search: 'Recherche',
+	notification_title: 'Message',
+	notification_ok: 'OK'
 }

@@ -25,6 +25,8 @@ var User = {
 					localStorage.setItem('_app_data', JSON.stringify(data));
 					
 					$('#login, #register').hide();
+					$('#button_login, #button_register').addClass('hidden');
+					$('#button_logout').removeClass('hidden');
 					$('#map_canvas').show();
 					
 					if (User.allow_search == true) {
@@ -36,6 +38,7 @@ var User = {
 					    User.updatePresence();
 					}
 					else {
+						User.getProfile();
 						$('#tab_profile').show();
 					}
 				    
@@ -62,7 +65,7 @@ var User = {
 			clearInterval(User.updatePresenceInterval);
 			
 			$('#index').show();
-			$('#wrap, #login, #register').hide();
+			$('#wrap, #login, #register, #tab_profile, #tab_engine, #tab_chat').hide();
 			
 			$('#button_login, #button_register').removeClass('hidden');
 			$('#button_logout').addClass('hidden');
@@ -208,15 +211,18 @@ var User = {
 	saveProfile: function() {
 		var form = $('#form_profile');
 		var error = false;
+		var err = '';
 		
 		form.find('select.interests').each(function(i, el) {
 			if ($(el).val() == 0) {
 				error = true;
+				err += ' 1';
 				return false;
 			}
 		})
 		
 		if ($('#profile_profession').val() == 0) {
+			err += ' 2';
 			error = true;
 		}
 		
@@ -233,14 +239,18 @@ var User = {
 		*/
 		
 		if ($('#profile_photo').attr('src') == '') {
+			err += ' 3';
 			error = true;
 		}
 		
 		if (error == true) {
 			message(_('profile_submit_error'));
+			err += ' 4';
 		}
 		else {
+			err += ' 5';
 			var data = form.serialize() + '&id=' + User.id;
+			err += ' 6';
 			
 			$.post(url + 'main/profile', data, function(result) {
 				User.response = result.code;
@@ -259,10 +269,18 @@ var User = {
 				options.params = params;
 	
 				var ft = new FileTransfer();
+				alert(err);
+				err += ' 7';
+				
 				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
+				
+				alert(err);
 				
 			}, 'JSON')
 		}
+		
+		
+		alert(err);
 		
 	},
 	
