@@ -259,14 +259,18 @@ var User = {
 				// Upload photo
 				var uri = $('#profile_photo').attr('src');
 				
-				alert('2' + uri);
+				alert('2 ' + uri);
 				
 				var options = new FileUploadOptions();
-				options.fileKey = 'file';
-				options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
-				options.mimeType = type;
-				
 				alert(3);
+				options.fileKey = 'file';
+				alert(4);
+				options.fileName = uri.substr(uri.lastIndexOf('/') + 1);
+				alert(5);
+				options.mimeType = 'image/jpg';
+				alert(6);
+				
+				
 	
 				var params = new Object();
 				params.user = User.id;
@@ -276,7 +280,7 @@ var User = {
 				var ft = new FileTransfer();
 				err += ' 7';
 				
-				alert(4);
+				alert(7);
 				
 				ft.upload(uri, url + 'main/photo', User.uploadFileSucces, User.uploadFileFail, options);
 				
