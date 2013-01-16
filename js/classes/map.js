@@ -16,18 +16,37 @@ var Map = {
 			
 			Map.map_canvas.gmap('getCurrentPosition', function(position, status) {
 				if ( status === 'OK' ) {
-					Map.addPoint({me: true, lat: position.coords.latitude, long: position.coords.longitude, id: User.id, username: User.username});
+					Map.addPoint({
+						me: true,
+						lat: position.coords.latitude,
+						long: position.coords.longitude,
+						id: User.id,
+						username: User.username,
+						photo: User.photo,
+					});
 					Map.show();
+					Map.demo(position.coords);
 				}
 			});
 			
 			Map.populate();
-			Map.demo();
 		});
 	},
 	
-	demo: function() {
-		
+	demo: function(from) {
+		for (var i = 0; i < 10; i++) {
+			var rand1 = Math.random() * (0.005 - -0.005) + -0.005;
+			var rand2 = Math.random() * (0.005 - -0.005) + -0.005;
+			
+			var p = {
+				lat: from.latitude + rand1,
+				long: from.longitude + rand2,
+				id: rand1,
+				username: 'Utilisateur'
+			};
+			Map.addPoint(p);
+			console.log(p)
+		}
 	},
 	
 	destroy: function() {
@@ -61,7 +80,7 @@ var Map = {
 			Map.map_canvas.gmap('addMarker', {'position': clientPosition, 'bounds': true, 'icon': 'images/me.png'}, function(map, marker) {
 				User.marker_me = marker;
 				google.maps.event.addListener(marker, 'click', function() {
-				    infoWindow.setContent('THIS IS ME');
+				    infoWindow.setContent('<img src="'+data.photo+'" width="150" />');
 				    infoWindow.open(map,marker);
 				});
 				Map.map_canvas.gmap('option', 'zoom', 15);
@@ -115,7 +134,7 @@ var Map = {
 		}, 'JSON')
 		
 	},
-	
+
 	watchPositionOnError: function() {
 		
 	},

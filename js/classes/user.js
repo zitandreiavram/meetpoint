@@ -2,6 +2,7 @@ var User = {
 		
 	id: null,
 	username: null,
+	photo: null,
 	allow_search: false,
 	has_profile: false,
 	countries: [],
@@ -12,20 +13,23 @@ var User = {
 	loadEngine: true,
 	
 	login: function(data) {
-		console.log(1)
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log(2)
 			data += '&long=' + position.coords.longitude;
 			data += '&lat=' + position.coords.latitude;
-			console.log(3)
+			
 			$.post(url + 'main/login', data, function(result) {
-				console.log(4)
 				if (result.error == false) {
 					User.id = parseInt(result.id, 10);
 					User.username = result.username;
 					User.allow_search = result.allow_search;
+					User.photo = result.photo;
 					
-					var data = {'id' : result.id, 'username' : result.username, 'allow_search' : result.allow_search};
+					var data = {
+						'id' : result.id,
+						'username' : result.username,
+						'photo' : result.photo,
+						'allow_search' : result.allow_search
+					};
 					localStorage.setItem('_app_data', JSON.stringify(data));
 					
 					$('#login, #register').hide();
@@ -51,7 +55,7 @@ var User = {
 				}
 			}, 'JSON')
 			
-		}, function(err){console.log(err)})
+		}, function(err){})
 	},
 	
 	logout: function() {

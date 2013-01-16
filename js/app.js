@@ -35,6 +35,7 @@ jQuery(document).ready(function($) {
 		User.id = _app_data.id;
 		User.username = _app_data.username;
 		User.allow_search = _app_data.allow_search;
+		User.photo = _app_data.photo;
 		
 		// Display tabs
 		$('#index').hide();
