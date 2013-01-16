@@ -3,6 +3,7 @@ var User = {
 	id: null,
 	username: null,
 	allow_search: false,
+	has_profile: false,
 	countries: [],
 	response: null,
 	updatePresenceInterval: null,
@@ -11,11 +12,14 @@ var User = {
 	loadEngine: true,
 	
 	login: function(data) {
+		console.log(1)
 		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log(2)
 			data += '&long=' + position.coords.longitude;
 			data += '&lat=' + position.coords.latitude;
-			
+			console.log(3)
 			$.post(url + 'main/login', data, function(result) {
+				console.log(4)
 				if (result.error == false) {
 					User.id = parseInt(result.id, 10);
 					User.username = result.username;
@@ -33,6 +37,7 @@ var User = {
 						Map.init();
 						Map.watchPosition();
 					    User.updatePresence();
+					    $('.tab_map').addClass('active');
 					}
 					else {
 						User.getProfile();
@@ -46,7 +51,7 @@ var User = {
 				}
 			}, 'JSON')
 			
-		}, function(){})
+		}, function(err){console.log(err)})
 	},
 	
 	logout: function() {
@@ -329,6 +334,10 @@ var User = {
 		
 		$.post(url + 'main/engine', data, function(result) {
 			User.allow_search = true;
+			var _app_data = JSON.parse(localStorage.getItem('_app_data'));
+			_app_data.allow_search = true;
+			localStorage.setItem('_app_data', JSON.stringify(_app_data));
+			
 			User.updatePresence();
 			$('#tab_engine').hide();
 			$('.tab').removeClass('active');
@@ -345,13 +354,13 @@ var User = {
 	},
 	
 	uploadFileSucces: function(r) {
+		User.has_profile = true;
 		message(_(User.response));
 		User.getEngine();
 		$('#tab_engine').show();
 		$('.tab').removeClass('active');
 		$('.tab_engine').addClass('active');
 		$('#tab_profile').hide();
-		console.log($('.tab_profile'))
 	},
 	
 	uploadFileFail: function(error) {

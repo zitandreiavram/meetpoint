@@ -48,6 +48,7 @@ jQuery(document).ready(function($) {
 		else {
 			User.getProfile();
 			$('#tab_profile').show();
+			$('.tab_profile').addClass('active');
 		}
 	}
 	else {
@@ -116,8 +117,16 @@ jQuery(document).ready(function($) {
 	$('#footer .tab').bind('click', function() {
 		var $this = $(this);
 		
-		if ($this.is('.tab_map, .tab_chat, .tab_engine')) {
+		if ($this.is('.tab_map, .tab_chat')) {
 			if (User.allow_search == false) {
+				$('#tab_profile').show();
+				message(_('complete_profile_to_search'));
+				return false;
+			}
+		}
+		
+		if ($this.is('.tab_engine')) {
+			if (User.allow_search == false && User.has_profile == false) {
 				$('#tab_profile').show();
 				message(_('complete_profile_to_search'));
 				return false;

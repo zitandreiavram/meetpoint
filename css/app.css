@@ -117,8 +117,11 @@ a.button:hover {
 	display: none;
 }
 		
+.chat {
+	display: none;
+}
+		
 #map_canvas {
-/*	visibility: hidden;*/
 	position: absolute;
 	top: -9999px;
 }
@@ -173,4 +176,8 @@ a.button:hover {
 
 .hidden {
 	display: none !important;
+}
+
+td.lang {
+	vertical-align: middle;
 }

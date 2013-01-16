@@ -22,7 +22,12 @@ var Map = {
 			});
 			
 			Map.populate();
+			Map.demo();
 		});
+	},
+	
+	demo: function() {
+		
 	},
 	
 	destroy: function() {
