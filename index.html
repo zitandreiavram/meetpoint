@@ -8,7 +8,10 @@
 	
 	<!-- Config -->
 	<script>
-		if (typeof window.location != 'undefined' && window.location.href.indexOf('localhost') >= 0) {
+		if (typeof window.location != 'undefined' && window.location.href.indexOf('apyka') >= 0) {
+			var url = 'http://www.apyka.com/maquette/meetpoint/app/';
+		}
+		else if (typeof window.location != 'undefined' && window.location.href.indexOf('localhost') >= 0) {
 			var url = 'http://localhost/meetpoint/app/';
 		}
 		else {
