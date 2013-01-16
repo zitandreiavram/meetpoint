@@ -78,7 +78,8 @@ var Map = {
 				marker.user = data.id;
 				marker.lat = data.lat;
 				marker.long = data.long;
-				marker.p = {lat: position.latitude, long: position.longitude};
+//				marker.p = {lat: position.latitude, long: position.longitude};
+				marker.p = {lat: clientPosition.latitude, long: clientPosition.longitude};
 				Map.markers[data.id] = marker;
 				google.maps.event.addListener(marker, 'click', function() {
 				    infoWindow.setContent(data.username + '<br /><br /><a href="#" class="send_message_open" rel="' + data.id + '" rev="' + data.username + '">Send message</a>');

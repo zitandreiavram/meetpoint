@@ -75,6 +75,10 @@ jQuery(document).ready(function($) {
 	$('#button_register').bind('click', function() {
 		$('#index, #login').hide();
 		$('#wrap, #register').show();
+		$('#form_register_sex').iphoneStyle({
+			checkedLabel: _('f_short'),
+			uncheckedLabel: _('m_short')
+		});
 	})
 	
 	$('#submit_register').bind('click', function() {
@@ -89,10 +93,10 @@ jQuery(document).ready(function($) {
 		User.login($('#form_login').serialize())
 	})
 	
-	$('#form_register_sex, #form_engine_sex').iphoneStyle({
-		checkedLabel: 'F',
-		uncheckedLabel: 'M'
-	});
+//	$('#form_register_sex, #form_engine_sex').iphoneStyle({
+//		checkedLabel: 'F',
+//		uncheckedLabel: 'M'
+//	});
 	
 	$('#photo_capture').bind('click', function() {
 		Tools.capturePhoto();

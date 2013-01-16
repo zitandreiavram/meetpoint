@@ -285,7 +285,12 @@ var User = {
 		User.loadEngine = false;
 		
 		$.getJSON(url + 'main/engine', {user: User.id}, function(result) {
-			$('#form_engine_sex').prop('checked', result.selected_sex == 1).iphoneStyle("refresh")
+
+			$('#form_engine_sex').iphoneStyle({
+				checkedLabel: _('f_short'),
+				uncheckedLabel: _('m_short'),
+				checked: result.selected_sex == 1
+			});
 			
 			$(result.search).each(function() {
 				var checked = result.selected_search.indexOf(parseInt(this.id, 10)) > -1 ? ' checked' : '';
