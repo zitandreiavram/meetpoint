@@ -6,7 +6,7 @@ var Map = {
 	marker_me: null,
 	isLoaded: false,
 	populateInterval: null,
-	populateIntervalTime: 3000,
+	populateIntervalTime: populate_map_time,
 	
 	init: function() {
 		Map.map_canvas = $('#map_canvas');

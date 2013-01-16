@@ -329,6 +329,7 @@ var User = {
 		
 		$.post(url + 'main/engine', data, function(result) {
 			User.allow_search = true;
+			User.updatePresence();
 			$('#tab_engine').hide();
 			$('.tab').removeClass('active');
 			$('.tab_map').addClass('active');
@@ -358,7 +359,11 @@ var User = {
 	},
 	
 	updatePresence: function() {
-		updatePresenceInterval = window.setInterval(function() {
+		if (User.updatePresenceInterval) {
+			return false;
+		}
+		
+		User.updatePresenceInterval = window.setInterval(function() {
 			$.get(url + 'main/online', {user: User.id})
 		}, User.updatePresenceIntervalTime)
 		
