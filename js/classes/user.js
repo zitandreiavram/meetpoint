@@ -332,7 +332,14 @@ var User = {
 			$('#tab_engine').hide();
 			$('.tab').removeClass('active');
 			$('.tab_map').addClass('active');
-			Map.show();
+			
+			if (Map.isLoaded == true) {
+				Map.show();
+				Map.populate();
+			}
+			else {
+				Map.init();
+			}
 		}, 'JSON')
 	},
 	

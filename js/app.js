@@ -93,11 +93,6 @@ jQuery(document).ready(function($) {
 		User.login($('#form_login').serialize())
 	})
 	
-//	$('#form_register_sex, #form_engine_sex').iphoneStyle({
-//		checkedLabel: 'F',
-//		uncheckedLabel: 'M'
-//	});
-	
 	$('#photo_capture').bind('click', function() {
 		Tools.capturePhoto();
 	})
@@ -111,7 +106,6 @@ jQuery(document).ready(function($) {
 	})
 	
 	$('#submit_search').bind('click', function() {
-		// Save search engine options and start searching
 		User.saveEngine();
 	})
 	
