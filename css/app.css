@@ -181,3 +181,44 @@ a.button:hover {
 td.lang {
 	vertical-align: middle;
 }
+
+#form_register label {
+	text-align: center;
+}
+
+#form_register .ui-checkbox-on {
+	background: #558ed5 !important;
+	color: #fff !important;
+	text-shadow: none !important;
+}
+
+.infowindow {
+	font-size: 12px;
+	text-align: center;
+	line-height: 120%;
+}
+
+.iPhoneCheckLabelOff {
+	text-align: right !important;
+}
+
+.language_selector {
+	margin-top: 30px;
+	text-align: center;
+}
+	
+	.language_selector a {
+		display: inline-block;
+		width: 30px;
+		height: 24px;
+		margin: 0 5px;
+	}
+	
+	.language_selector a.fr {
+		background-image: url(../images/lang/fr.png)
+	}
+	
+	.language_selector a.en {
+		background-image: url(../images/lang/en.png)
+	}
+	

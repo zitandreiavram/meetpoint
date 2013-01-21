@@ -11,6 +11,9 @@
 		if (typeof window.location != 'undefined' && window.location.href.indexOf('apyka') >= 0) {
 			var url = 'http://www.apyka.com/maquette/meetpoint/app/';
 		}
+		else if (typeof window.location != 'undefined' && window.location.href.indexOf('crma') >= 0) {
+			var url = 'http://www.crma.ro/meetpoint/app/';
+		}
 		else if (typeof window.location != 'undefined' && window.location.href.indexOf('localhost') >= 0) {
 			var url = 'http://localhost/meetpoint/app/';
 		}
@@ -53,6 +56,7 @@
 	<!-- Classes -->
 	<script src="js/classes/lang.js"></script>
 	<script src="js/classes/user.js"></script>
+	<script src="js/classes/chat.js"></script>
 	<script src="js/classes/tools.js"></script>
 	<script src="js/classes/map.js"></script>
 	
@@ -73,6 +77,10 @@
 		<a href="#" class="button lang hidden" lang="login" id="button_login">Connexion</a>
 		<a href="#" class="button lang hidden" lang="register" id="button_register">Inscription</a>
 		<a href="#" class="button lang hidden" lang="logout" id="button_logout">Logout</a>
+		<div class="language_selector" id="language_selector">
+			<a href="#" rel="fr" class="fr"></a>
+			<a href="#" rel="en" class="en"></a>
+		</div>
 	</div>
 </div><!-- index -->
 
@@ -111,7 +119,7 @@
 					</tr>
 					<tr>
 						<td class="lang" lang="i_am">Je suis</td>
-						<td><input type="checkbox" name="sex" value="male" id="form_register_sex" /></td>
+						<td class="iphonestyle"><input type="checkbox" name="sex" value="male" id="form_register_sex" /></td>
 					</tr>
 					<tr>
 						<td class="lang" lang="dob">Né(e) le</td>
@@ -122,6 +130,18 @@
 						<td>
 							<select name="country" id="form_register_country">
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="lang" lang="zip">Code postale</td>
+						<td><input class="lang" lang="zip" type="text" name="zip" placeholder="zip" /></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<label for="form_register_confirm_requirements" class="lang" lang="confirm_requirements" id="form_register_confirm_requirements_label">
+								accepter les CGV + certifier que la personne est majeure
+							</label>
+							<input type="checkbox" name="confirm_requirements" id="form_register_confirm_requirements" value="1" />
 						</td>
 					</tr>
 					<tr>
@@ -252,22 +272,11 @@
 		</div>
 		
 		<div id="tab_chat" class="chat screen">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<p style="text-shadow: none;text-align: center;color: #fff;">en cours de construction</p>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+			<div id="chat">
+				
+			</div>
+			<textarea id="chat_message"></textarea>
+			<a href="#" id="chat_send_message" class="button lang" lang="message_send">Send</a>
 		</div>
 		
 		<div id="map_canvas" style="width:100%;height: 370px;"></div>

@@ -24,6 +24,7 @@ var watchID;
 jQuery(document).ready(function($) {
 	
 	Lang.init();
+	Chat.init();
 	
 	if (User.isLogged()) {
 		$('#loading').hide();
@@ -43,6 +44,8 @@ jQuery(document).ready(function($) {
 		
 		if (User.allow_search == true) {
 			User.updatePresence();
+			Chat.getRequest();
+			Map.watchPosition();
 			Map.init();
 			$('.tab_map').addClass('active');
 		}
@@ -51,6 +54,9 @@ jQuery(document).ready(function($) {
 			$('#tab_profile').show();
 			$('.tab_profile').addClass('active');
 		}
+		
+		// Get data
+		User.getData();
 	}
 	else {
 		User.getCountries();
@@ -78,10 +84,16 @@ jQuery(document).ready(function($) {
 		User.logout();
 	})
 	
+	$('#language_selector a').bind('click', function() {
+		Lang.set($(this).attr('rel'))
+	})
+	
+	var form_register_sex;
+	
 	$('#button_register').bind('click', function() {
 		$('#index, #login').hide();
 		$('#wrap, #register').show();
-		$('#form_register_sex').iphoneStyle({
+		form_register_sex = $('#form_register_sex').iphoneStyle({
 			checkedLabel: _('f_short'),
 			uncheckedLabel: _('m_short')
 		});
@@ -169,72 +181,21 @@ jQuery(document).ready(function($) {
 		}
 	})
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	return false;
-	
-	
-	var get_messages_timer;
-	
+	// Chat
 	$('.send_message_open').live('click', function() {
-		var username = $(this).attr('rev');
-		var to = $(this).attr('rel');
-		$('#to').val(to);
-		var from = get_user().user;
-		$('#from').val(from);
-		$('#to_name').text(username);
-		$('#send_message').show();
+		var $this = $(this);
 		
-		get_messages_timer = window.setInterval(function() {
-			$.getJSON(url, {action: 'chat', from: from, to: to}, function(data) {
-				$('#chat').html('');
-				put_chat(data.messages);
-			})
-		}, 1000);
+		var user = parseInt($this.attr('rel'), 10);
+		Chat.sendRequest(user);
 		
 		return false;
 	})
 	
-	$('#send_message_action').bind('click', function() {
-		$.post(url, $('#send_message_form').serialize(), function(data) {
-			if (data.result = 1) {
-				$('#chat').html('');
-				put_chat(data.messages);
-				$('#message_content').val('')
-			}
-		}, 'JSON')
+	$('#chat_send_message').bind('click', function() {
+		Chat.message();
 	})
 
 })
-
-function put_chat(messages) {
-	$(messages).each(function() {
-		var message = this.message + '<hr />';
-		$('#chat').append(message);
-	})
-}
-
-
-function get_user() {
-	var str = localStorage.getItem('_app_data');
-	return JSON.parse(str);
-}
 
 function message(text) {
 	if (typeof navigator.notification == 'undefined') {
@@ -245,3 +206,13 @@ function message(text) {
 	}
 }
 
+function confirmation(title, text, callback) {
+	if (typeof navigator.notification == 'undefined') {
+		var result = confirm(title + ' ' + text);
+		var option = result == true ? 1 : 2;
+		callback(option);
+	}
+	else {
+		navigator.notification.confirm(text, callback, text)
+	}
+}

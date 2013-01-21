@@ -25,7 +25,7 @@ var Map = {
 						photo: User.photo,
 					});
 					Map.show();
-					Map.demo(position.coords);
+//					Map.demo(position.coords);
 				}
 			});
 			
@@ -68,7 +68,6 @@ var Map = {
 	},
 	
 	addPoint: function(data) {
-		
 		var infoWindow = new google.maps.InfoWindow({});
 		var clientPosition = new google.maps.LatLng(data.lat, data.long);
 		
@@ -105,9 +104,34 @@ var Map = {
 //				marker.p = {lat: position.latitude, long: position.longitude};
 				marker.p = {lat: clientPosition.latitude, long: clientPosition.longitude};
 				Map.markers[data.id] = marker;
+				
+				var distance_type = data.distance < 1 ? 'distance_m' : 'distance_km';
+				
+				var html = '<p class="infowindow">'
+					+ '<img src="' + data.photo + '" width="150" />'
+					+ '<br />'
+					+ '<strong>' + data.username + '</strong>'
+					+ '<br />'
+					+ _('situated') + data.distance + _(distance_type)
+					+ '<br />';
+				
+				var interests_list = '';
+				$(data.interests).each(function(i, id) {
+					$(User.data.interests).each(function(j, interest) {
+						if (id == interest.id) {
+							interests_list += interest[Lang.current]+ ', ';
+						}
+					})
+				})
+				html += interests_list.substr(0, interests_list.length - 2);
+				
+				html += '<br />';
+				html += '<a href="#" class="send_message_open" rel="' + data.id + '" rev="' + data.username + '">' + _('send_message') + '</a>';
+				html += '</p>';
+
 				google.maps.event.addListener(marker, 'click', function() {
-				    infoWindow.setContent(data.username + '<br /><br /><a href="#" class="send_message_open" rel="' + data.id + '" rev="' + data.username + '">Send message</a>');
-				    infoWindow.open(map,marker);
+				    infoWindow.setContent(html);
+				    infoWindow.open(map, marker);
 				});
 			});
 		}
@@ -115,22 +139,27 @@ var Map = {
 	},
 	
 	watchPosition: function() {
-		
+		return false;
 		var options = { frequency: 3000 };
 	    this.watchID = navigator.geolocation.watchPosition(this.watchPositionSucces, this.watchPositionOnError, options);
-		
 	},
 	
 	watchPositionSucces: function(position) {
-		
 		var data = {
 			id: User.id,
 			long: position.coords.longitude,
 			lat: position.coords.latitude
 		}
-			
+
 		$.post(url + 'main/position', data, function(data) {
-			Map.addPoint({lat: position.coords.latitude, longitude: position.coords.longitude, id: User.id, username: User.username});
+			Map.addPoint({
+				me: true,
+				lat: position.coords.latitude,
+				longitude: position.coords.longitude,
+				id: User.id,
+				username: User.username,
+				photo: User.photo,
+			});
 		}, 'JSON')
 		
 	},
@@ -161,12 +190,21 @@ var Map = {
 					
 					// if user still online
 					else {
+//						var p = {
+//							lat: this.lat,
+//							long: this.long,
+//							id: this.id,
+//							username: this.username,
+//							photo: this.photo
+//						};
+						
+						var p = this;
 						// if new user, add point
 						if (typeof Map.markers[index] == 'undefined') {
 							if (this.online == 1) {
 //								var p = {latitude: this.lat, longitude: this.long};
 //								add_point(p, false, {username: this.username, id: this.id});
-								Map.addPoint({lat: this.lat, long: this.long, id: this.id, username: this.username});
+								Map.addPoint(p);
 							}
 						}
 						
@@ -179,7 +217,8 @@ var Map = {
 								
 //								var p = {latitude: this.lat, longitude: this.long};
 //								add_point(p, false, {username: this.username, id: this.id, lat: this.lat, long: this.long});
-								Map.addPoint({lat: this.lat, long: this.long, id: this.id, username: this.username});
+//								Map.addPoint({lat: this.lat, long: this.long, id: this.id, username: this.username});
+								Map.addPoint(p);
 							}
 						}
 					}

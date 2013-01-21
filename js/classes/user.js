@@ -11,6 +11,7 @@ var User = {
 	updatePresenceIntervalTime: update_presence_time,
 	loadProfile: true,
 	loadEngine: true,
+	data: [],
 	
 	login: function(data) {
 		navigator.geolocation.getCurrentPosition(function(position) {
@@ -41,12 +42,16 @@ var User = {
 						Map.init();
 						Map.watchPosition();
 					    User.updatePresence();
+					    Chat.getRequest();
 					    $('.tab_map').addClass('active');
 					}
 					else {
 						User.getProfile();
 						$('#tab_profile').show();
 					}
+					
+					// Get data
+					User.getData();
 				    
 				    $('#footer').show();
 				}
@@ -57,7 +62,7 @@ var User = {
 			
 		}, function(err){})
 	},
-	
+
 	logout: function() {
 		$.post(url + 'main/logout', {id: User.id}, function() {
 			User.id = null;
@@ -294,7 +299,6 @@ var User = {
 		User.loadEngine = false;
 		
 		$.getJSON(url + 'main/engine', {user: User.id}, function(result) {
-
 			$('#form_engine_sex').iphoneStyle({
 				checkedLabel: _('f_short'),
 				uncheckedLabel: _('m_short'),
@@ -343,6 +347,9 @@ var User = {
 			localStorage.setItem('_app_data', JSON.stringify(_app_data));
 			
 			User.updatePresence();
+			Chat.getRequest();
+			Map.watchPosition();
+			
 			$('#tab_engine').hide();
 			$('.tab').removeClass('active');
 			$('.tab_map').addClass('active');
@@ -359,6 +366,7 @@ var User = {
 	
 	uploadFileSucces: function(r) {
 		User.has_profile = true;
+		User.photo = $('#profile_photo').attr('src');
 		message(_(User.response));
 		User.getEngine();
 		$('#tab_engine').show();
@@ -380,6 +388,12 @@ var User = {
 			$.get(url + 'main/online', {user: User.id})
 		}, User.updatePresenceIntervalTime)
 		
+	},
+	
+	getData: function() {
+		$.getJSON(url + 'main/data', function(result) {
+			User.data = result.data;
+		})
 	}
 
 }

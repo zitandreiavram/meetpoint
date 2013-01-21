@@ -8,6 +8,14 @@ var Lang = {
 	},
 
 	set: function(lang) {
+		if (lang == undefined || lang == '') {
+			lang = default_language;
+		}
+		
+		if (lang == this.current) {
+			return false;
+		}
+		
 		this.current = lang;
 		localStorage.setItem('_app_saved_lang_', lang);
 		
@@ -18,6 +26,10 @@ var Lang = {
 			$this.text($.i18n._($this.attr('lang')))
 			$this.attr('placeholder', $.i18n._($this.attr('lang')))
 		})
+		
+		// extra
+		$('.iPhoneCheckLabelOn span').text(_('f_short'))
+		$('.iPhoneCheckLabelOff span').text(_('m_short'))
 	}
 }
 
