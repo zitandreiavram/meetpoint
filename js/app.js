@@ -148,6 +148,7 @@ jQuery(document).ready(function($) {
 		
 		$('#index, .screen').hide();
 		$('#wrap').show();
+		$('#chat_send_area').hide();
 		
 		$('#footer .tab').removeClass('active');
 		$this.addClass('active');
@@ -177,6 +178,10 @@ jQuery(document).ready(function($) {
 			
 			if ($this.hasClass('tab_engine')) {
 				User.getEngine();
+			}
+			
+			if ($this.hasClass('tab_chat')) {
+				$('#chat_send_area').show();
 			}
 		}
 	})

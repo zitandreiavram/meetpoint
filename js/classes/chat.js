@@ -3,6 +3,7 @@ var Chat = {
 	list: null,
 	chat_with: null,
 	chat_with_username: null,
+	chat_with_photo: null,
 	getRequestInterval: null,
 	getRequestIntervalTime: 3000,
 	chatRequestId: null,
@@ -36,6 +37,7 @@ var Chat = {
 					Chat.start({
 						id: result.accepted_chat_with_user,
 						username: result.accepted_chat_with_user_username,
+						photo: result.accepted_chat_with_user_photo,
 					})
 				}
 			})
@@ -48,6 +50,7 @@ var Chat = {
 				Chat.start({
 					id: result.user_id,
 					username: result.user_username,
+					photo: result.user_photo,
 				});
 			}
 		})
@@ -56,6 +59,7 @@ var Chat = {
 	start: function(u) {
 		Chat.chat_with = u.id;
 		Chat.chat_with_username = u.username;
+		Chat.chat_with_photo = u.photo;
 		
 		Chat.startInterval = window.setInterval(function() {
 			$.getJSON(url + 'main/chat/get', {from: User.id, to: Chat.chat_with, last_message_id: Chat.lastMessageId}, function(result) {
@@ -64,9 +68,8 @@ var Chat = {
 		}, Chat.startIntervalTime);
 		
 		$('#tab_profile, #tab_engine').hide();
-		$('#tab_profile, #tab_engine').hide();
 		Map.hide();
-		$('#tab_chat').show();
+		$('#tab_chat, #chat_send_area').show();
 		$('.tab_chat').addClass('active');
 		$('.tab').removeClass('active');
 	},
@@ -81,27 +84,38 @@ var Chat = {
 			return false;
 		}
 		
-//		Chat.list.html('')
 		$(messages).each(function(i, el) {
 			var mid = '_m_' + el.id;
 			if ($('#' + mid).length == 0) {
-				var text = '<div id="' + mid + '">'
-				
+				var u = '';
+				var i = '';
+				var chat_left = '';
 				if (el.from == User.id && el.to == Chat.chat_with) {
-					text += 'Moi : ';
+					u = User.username;
+					i = User.photo;
+				}
+				if (el.to == User.id && el.from == Chat.chat_with) {
+					u = Chat.chat_with_username;
+					i = Chat.chat_with_photo;
+					chat_left = ' chat_line_left';
 				}
 				
-				if (el.to == User.id && el.from == Chat.chat_with) {
-					text += Chat.chat_with_username + ' : ';
-				}
-					
-				text += el.message
-					+ '<hr /></div>';
+				var text = '<div class="chat_line'+chat_left+'" id="' + mid + '">'
+					+ '<div class="msg">'
+						+ '<span class="username">'+ u +'</span>'
+						+ '<span class="time">' + el.date + '</span>'
+						+ '<span class="text">' + el.message + '</span>'
+					+ '</div>'
+					+ '<div class="avatar">'
+						+ '<div class="avatar_img">'
+							+ '<img src="'+ i +'" height="100%" />'
+						+ '</div>'
+					+ '</div>'
+				+ '</div>';
+				
 				var html = text + Chat.list.html();
 				Chat.list.html(html);
 			}
-//			Chat.list.html(message + Chat.list.html());
-//			Chat.list.append(message);
 		})
 		
 		Chat.lastMessageId = messages[messages.length - 1].id;
